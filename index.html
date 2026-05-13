@@ -4376,6 +4376,33 @@ const FB_CFG = {
   appId:             '1:1073176813921:web:1490f7b8f30472067ca520',
 };
 
+function fbSetDot(ok) {
+  // 헤더 점 상태 업데이트
+  const dot = document.querySelector('.odot');
+  if(dot) {
+    dot.style.background = ok ? '#00E676' : '#FF9100';
+    dot.style.boxShadow  = ok ? '0 0 5px #00E676' : 'none';
+    dot.title = ok ? '🟢 Firebase 실시간 연결됨' : '🟡 오프라인';
+  }
+  // Firebase 패널 상태 업데이트
+  const fbDot = document.getElementById('fbDot');
+  if(fbDot) {
+    fbDot.style.background = ok ? '#00E676' : '#FF9100';
+    fbDot.style.boxShadow  = ok ? '0 0 10px #00E676' : 'none';
+  }
+  const fbTitle = document.getElementById('fbStatTitle');
+  if(fbTitle) fbTitle.textContent = ok
+    ? '✅ Firebase 실시간 연결됨 — 팀 전체 공유 중'
+    : 'Firebase 미연결';
+  const fbPanel = document.getElementById('fbPanel');
+  if(fbPanel) {
+    fbPanel.style.background = ok
+      ? 'linear-gradient(135deg,rgba(0,230,118,.08),rgba(0,200,80,.04))'
+      : 'linear-gradient(135deg,rgba(255,145,0,.08),rgba(255,68,0,.04))';
+    fbPanel.style.borderColor = ok ? 'rgba(0,230,118,.4)' : 'rgba(255,145,0,.25)';
+  }
+}
+
 let _db, _logColl, _inspColl;
 let _fbReady  = false;
 let _logUnsub = null;
